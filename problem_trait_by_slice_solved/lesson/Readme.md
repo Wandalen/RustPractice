@@ -1,5 +1,11 @@
 # Trait for slice/array
 
+### Problem
+
+Implementing trait for reference on array does not imply implementing the trait for a slice and vice versa. Slice and array are different concepts, don't confuse them.
+
+### Journey
+
 How to check slice/array implements something at compile time?
 Write a function returning true.
 
