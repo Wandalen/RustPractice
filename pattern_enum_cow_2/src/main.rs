@@ -1,5 +1,5 @@
 use std::borrow::Cow;
-use std::any::type_name;
+// use std::any::type_name;
 
 fn main()
 {
@@ -41,5 +41,5 @@ fn modify< 'a >( src : &'a [i32] ) -> Cow< 'a, [ i32 ] >
 
 fn type_name_of< T >( _ : &T ) -> &'static str
 {
-  type_name::< T >()
+  std::any::type_name::< T >()
 }
