@@ -1,0 +1,36 @@
+[package]
+name = "problem_trait_by_slice"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[[example]]
+name = "problem_00"
+path = "lesson/problem_00.rs"
+
+[[example]]
+name = "problem_01"
+path = "lesson/problem_01.rs"
+
+[[example]]
+name = "problem_02"
+path = "lesson/problem_02.rs"
+
+[[example]]
+name = "problem_03"
+path = "lesson/problem_03.rs"
+
+[[example]]
+name = "problem_04"
+path = "lesson/problem_04.rs"
+
+[[example]]
+name = "problem_05"
+path = "lesson/problem_05.rs"
+
+[[example]]
+name = "solution"
+path = "lesson/solution.rs"
