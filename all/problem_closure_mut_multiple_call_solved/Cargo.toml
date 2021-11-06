@@ -1,0 +1,17 @@
+[package]
+name = "problem_mut_closure_multiple_call"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "problem"
+path = "src/problem.rs"
+
+[[bin]]
+name = "solution"
+path = "src/solution.rs"
+
+[dependencies]
+

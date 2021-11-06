@@ -1,0 +1,24 @@
+[package]
+name = "problem_onwership_move_out_borrowed"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "problem"
+path = "src/problem.rs"
+
+[[bin]]
+name = "solution"
+path = "src/solution.rs"
+
+[[bin]]
+name = "problem2"
+path = "src/problem2.rs"
+
+[[bin]]
+name = "solution2"
+path = "src/solution2.rs"
+
+[dependencies]
+byte-slice-cast = "1.2.0"
+owning_ref = "0.4.1"

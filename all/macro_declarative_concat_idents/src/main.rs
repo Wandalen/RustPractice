@@ -1,4 +1,4 @@
-#![feature(concat_idents)]
+#![ feature( concat_idents ) ]
 
 /*
 macro of concatenation to synth an identifier using feature::concat_idents

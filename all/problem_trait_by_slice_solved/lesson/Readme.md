@@ -17,7 +17,7 @@ let src : &[ i32 ] = &[ 1, 2, 3 ];
 assert_eq!( does_implement_trait1( &src ), true );
 ```
 
-[Code](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=807aabe00f97c3b184da78379720d5b8)
+[Code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=807aabe00f97c3b184da78379720d5b8)
 
 That works, but replacing a variable by immidiate data breaks the program:
 
@@ -29,7 +29,7 @@ let src = &[ 1, 2, 3 ];
 assert_eq!( does_implement_trait1( &src ), true );
 ```
 
-[Code](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=68823817984d1c9f94ae1bc713b74974)
+[Code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=68823817984d1c9f94ae1bc713b74974)
 
 Problem:
 
@@ -56,7 +56,7 @@ dbg!( std::mem::size_of_val( &src2 ) );
 dbg!( std::mem::size_of_val( &1_usize ) );
 ```
 
-[Code](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=4b7ae7def867dac6a03ea5a502544f05)
+[Code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=4b7ae7def867dac6a03ea5a502544f05)
 
 Output:
 ```log
@@ -85,16 +85,16 @@ let src2 = &[ 1, 2, 3 ];
 assert_eq!( does_implement_trait1( &src2 ), true );
 ```
 
-[Code](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=5d346aca864d987e122468807c38800a)
+[Code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=5d346aca864d987e122468807c38800a)
 
 Now trait Trait1 is implemented for both types of references.
 
 Extra problem: let's fix the original problem so, that we get a thin pointer out of the array.
-To solve the extra problem loosen prototype of function `does_implement_trait1` to make it accept unsized input adding `+ ?Sized` and add replace `&src2` by `&&src2[ .. ]`.
+To solve the extra problem just replace `&src2` by `&&src2[ .. ]`.
 
 ```rust
 trait Trait1 {}
-fn does_implement_trait1( _ : &( impl Trait1 + ?Sized ) ) -> bool { true }
+fn does_implement_trait1( _ : &impl Trait1 ) -> bool { true }
 impl< T : Sized > Trait1 for &[ T ] {}
 // impl< T : Sized, const N : usize > Trait1 for &[ T; N ] {}
 let src1 : &[ i32 ] = &[ 1, 2, 3 ];
@@ -103,7 +103,7 @@ let src2 = &[ 1, 2, 3 ];
 assert_eq!( does_implement_trait1( &&src2[ .. ] ), true );
 ```
 
-[Code](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=b993179e3d69a19a619e20bd3ad76c16)
+[Code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=50b09ce5af70ef7605367ebedd21a3e9)
 
 That runs.
 

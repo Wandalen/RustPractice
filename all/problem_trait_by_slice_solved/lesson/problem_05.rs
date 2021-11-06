@@ -3,7 +3,7 @@
 fn main()
 {
   trait Trait1 {}
-  fn does_implement_trait1( _ : &( impl Trait1 + ?Sized ) ) -> bool { true }
+  fn does_implement_trait1( _ : &impl Trait1 ) -> bool { true }
   impl< T : Sized > Trait1 for &[ T ] {}
   // impl< T : Sized, const N : usize > Trait1 for &[ T; N ] {}
   let src1 : &[ i32 ] = &[ 1, 2, 3 ];
