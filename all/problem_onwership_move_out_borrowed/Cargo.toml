@@ -19,6 +19,18 @@ path = "src/problem2.rs"
 name = "solution2"
 path = "src/solution2.rs"
 
+[[bin]]
+name = "solution2b"
+path = "src/solution2b.rs"
+
+[[bin]]
+name = "problem3"
+path = "src/problem3.rs"
+
+[[bin]]
+name = "solution3"
+path = "src/solution3.rs"
+
 [dependencies]
 byte-slice-cast = "1.2.0"
 owning_ref = "0.4.1"

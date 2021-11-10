@@ -1,0 +1,9 @@
+[package]
+name = "concurrency_future_1"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+futures = "0.3.17"
+pin-utils = "0.1.0"
+tokio = { version = "1.13.0", features = [ "full" ] }

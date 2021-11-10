@@ -1,0 +1,5 @@
+I am good line
+i am hiding
+
+I will be selected
+i will not

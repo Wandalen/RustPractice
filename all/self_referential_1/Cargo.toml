@@ -1,0 +1,14 @@
+[package]
+name = "self_referential_1"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "solution1"
+path = "src/solution1.rs"
+
+[[bin]]
+name = "solution2"
+path = "src/solution2.rs"
+
+[dependencies]

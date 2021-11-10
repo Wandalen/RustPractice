@@ -26,11 +26,13 @@ struct Context<>
   pub dst : OwningRef< Box::< [ f32 ] >, [ u8 ] >
 }
 
+// impl Context
+
 //
 
-impl<> Context<>
+impl Context
 {
-  fn new<>() -> Context<>
+  fn new() -> Context
   {
     let len : usize = 2;
     let dst_buffer : Box<[ f32 ]> = vec![ 0_f32; len ].into_boxed_slice();
