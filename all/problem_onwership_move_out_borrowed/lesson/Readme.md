@@ -101,6 +101,30 @@ impl<> Context<>
 But what if dependant field is not reference. Lets say `Cursor` borrow bytes buffer. Also, is it possible to solve the problem without `owning_ref`?
 Yes!
 
+In the original problem were 3 enitities:
+
+- `dst_buffer : Box<[ f32 ]>`
+- `dst_bytes : &mut [ u8 ]`
+- `dst_cursor = Cursor::new( dst_bytes )`
+
+`dst_bytes` are borrowed from `dst_buffer` and `dst_cursor` consumes `dst_bytes`:
+
+`dst_buffer <- dst_bytes <- dst_cursor`
+
+Breaking association between `dst_bytes` and `dst_buffer` fix the problem:
+```rust
+      let dst_bytes : &mut [ u8 ] = unsafe
+      {
+        let dst_slice = dst_buffer.as_mut_byte_slice();
+        std::slice::from_raw_parts_mut( dst_slice.as_mut_ptr(), dst_slice.len() )
+      };
+```
+So now it looks like that:
+
+`dst_buffer -x- dst_bytes <- dst_cursor`
+
+But exposing such fields may lead to dangling pointers problem if a user will reallocate memory of `dst_buffer` somehow. So my solution hides fields and exposes only references so that no reallocation can happen from user-land.
+
 ```rust
 #![feature(generic_associated_types)]
 #![allow(dead_code)]
@@ -195,4 +219,3 @@ mod internal
 [Code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=a3007ab0cc31fae6b99a25acf697a680)
 
 Line `std::slice::from_raw_parts_mut( dst_slice.as_mut_ptr(), dst_slice.len() )` breaks relation between dst_buffer and dst_bytes and associated lifetime of `dst_cursor` with the `Context`.
-

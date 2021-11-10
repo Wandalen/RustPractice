@@ -9,15 +9,6 @@ fn main()
 {
   let context = context_make();
   dbg!( &context );
-
-  // dbg!( &context.dst_buffer() );
-  // dbg!( &context.dst_bytes() );
-
-  // context.dst_buffer()[ 1 ] = 13.;
-  // context.dst_bytes()[ 1 ] = 13;
-
-  // dbg!( context.dst.as_owner() );
-  // dbg!( &*context.dst );
 }
 
 //
@@ -33,7 +24,7 @@ fn context_make< 'a >() -> Context< 'a >
 struct Context< 'a >
 {
   dst_buffer : Box::< [ f32 ] >,
-  pub dst_cursor : std::io::Cursor< &'a mut [ u8 ] >,
+  dst_cursor : std::io::Cursor< &'a mut [ u8 ] >,
 }
 
 impl< 'a > Context< 'a >
