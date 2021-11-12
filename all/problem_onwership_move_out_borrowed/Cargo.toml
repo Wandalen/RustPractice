@@ -31,6 +31,10 @@ path = "src/problem3.rs"
 name = "solution3"
 path = "src/solution3.rs"
 
+[[bin]]
+name = "solution3b"
+path = "src/solution3b.rs"
+
 [dependencies]
 byte-slice-cast = "1.2.0"
 owning_ref = "0.4.1"
