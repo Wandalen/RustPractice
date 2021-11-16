@@ -406,5 +406,5 @@ Another big thing is the difference between `impl Trait` in a position of argume
 
 ### Notes
 
-The Article is based on [the discussion](https://users.rust-lang.org/t/closure-as-argument-parameterization-with-impl-trait/67297/18) on the official forum.
+The Article is based on [the discussion](https://users.rust-lang.org/t/closure-as-argument-parameterization-with-impl-trait/67297/18) on the official forum of Rust.
 
