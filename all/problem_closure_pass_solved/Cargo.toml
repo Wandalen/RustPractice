@@ -1,0 +1,62 @@
+[package]
+name = "problem_closure_pass"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "problem_1"
+path = "src/problem_1.rs"
+
+[[bin]]
+name = "problem_2"
+path = "src/problem_2.rs"
+
+[[bin]]
+name = "problem_3"
+path = "src/problem_3.rs"
+
+[[bin]]
+name = "solution_2"
+path = "src/solution_2.rs"
+
+[[bin]]
+name = "solution"
+path = "src/solution.rs"
+
+[[bin]]
+name = "returning_problem_1"
+path = "src/returning_problem_1.rs"
+
+[[bin]]
+name = "returning_solution_1"
+path = "src/returning_solution_1.rs"
+
+[[bin]]
+name = "returning_solution_2"
+path = "src/returning_solution_2.rs"
+
+[[bin]]
+name = "position_difference_1"
+path = "src/position_difference_1.rs"
+
+[[bin]]
+name = "position_difference_2"
+path = "src/position_difference_2.rs"
+
+[[bin]]
+name = "position_difference_3"
+path = "src/position_difference_3.rs"
+
+[[bin]]
+name = "position_difference_4"
+path = "src/position_difference_4.rs"
+
+[[bin]]
+name = "parameter_difference_1"
+path = "src/parameter_difference_1.rs"
+
+[[bin]]
+name = "experiment"
+path = "src/experiment.rs"
+
+[dependencies]
