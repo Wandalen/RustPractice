@@ -2,7 +2,7 @@
 // more convenient than passing a full vector of args to the builder all at
 // once.
 //
-// Look for a field attribute #[builder( each = "..." )] on each field. The
+// Look for a field attribute #[builder(   each = "..."   )] on each field. The
 // generated code may assume that fields with this attribute have the type Vec
 // and should use the word given in the string literal as the name for the
 // corresponding builder method which accepts one vector element at a time.
@@ -12,7 +12,7 @@
 // derive macro. Otherwise the compiler will report them as unrecognized
 // attributes and refuse to compile the caller's code.
 //
-//     #[proc_macro_derive( Builder, attributes( builder ) )]
+//     #[proc_macro_derive(   Builder, attributes(   builder   )   )]
 //
 // These are called inert attributes. The word "inert" indicates that these
 // attributes do not correspond to a macro invocation on their own; they are
@@ -32,23 +32,25 @@
 use derive_builder::Builder;
 
 #[derive( Builder )]
-pub struct Command {
-    executable: String,
-    #[builder( each = "arg" )]
-    args: Vec<String>,
-    #[builder( each = "env" )]
-    env: Vec<String>,
-    current_dir: Option<String>,
+pub struct Command
+{
+  executable : String,
+  #[builder( each = "arg" )]
+  args : Vec<String>,
+  #[builder( each = "env" )]
+  env : Vec<String>,
+  current_dir : Option<String>,
 }
 
-fn main(  ) {
-    let command = Command::builder(  )
-        .executable( "cargo".to_owned(  ) )
-        .arg( "build".to_owned(  ) )
-        .arg( "--release".to_owned(  ) )
-        .build(  )
-        .unwrap(  );
+fn main()
+{
+  let command = Command::builder()
+    .executable( "cargo".to_owned() )
+    .arg( "build".to_owned() )
+    .arg( "--release".to_owned() )
+    .build()
+    .unwrap();
 
-    assert_eq!( command.executable, "cargo" );
-    assert_eq!( command.args, vec!["build", "--release"] );
+  assert_eq!( command.executable, "cargo" );
+  assert_eq!( command.args, vec!["build", "--release"] );
 }

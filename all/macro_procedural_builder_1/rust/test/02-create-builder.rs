@@ -1,15 +1,15 @@
 // Have the macro produce a struct for the builder state, and a `builder`
 // function that creates an empty instance of the builder.
 //
-// As a quick start, try generating the following code ( but make sure the type
-// name matches what is in the caller's input ).
+// As a quick start, try generating the following code (   but make sure the type
+// name matches what is in the caller's input   ).
 //
 //     impl Command {
-//         pub fn builder(  ) {}
+//         pub fn builder(      ) {}
 //     }
 //
 // At this point the test should pass because it isn't doing anything with the
-// builder yet, so `(  )` as the builder type is as good as any other.
+// builder yet, so `(      )` as the builder type is as good as any other.
 //
 // Before moving on, have the macro also generate:
 //
@@ -23,7 +23,7 @@
 // and in the `builder` function:
 //
 //     impl Command {
-//         pub fn builder(  ) -> CommandBuilder {
+//         pub fn builder(      ) -> CommandBuilder {
 //             CommandBuilder {
 //                 executable: None,
 //                 args: None,
@@ -48,8 +48,8 @@ use derive_builder::Builder;
 pub struct Command
 {
   executable : String,
-  args : Vec< String >,
-  env : Vec< String >,
+  args : Vec<String>,
+  env : Vec<String>,
   current_dir : String,
 }
 
@@ -57,6 +57,6 @@ pub struct Command
 
 fn main()
 {
-  let builder = Command::builder(  );
+  let builder = Command::builder();
   let _ = builder;
 }

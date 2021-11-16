@@ -1,5 +1,9 @@
-extern crate proc_macro;
+#![ feature( type_name_of_val ) ]
 
+extern crate proc_macro;
+extern crate proc_macro_error;
+
+mod wt;
 mod builder;
 
 #[proc_macro_derive( Builder )]

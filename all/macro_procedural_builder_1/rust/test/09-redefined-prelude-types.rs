@@ -10,21 +10,22 @@
 // different from Result::Ok. This caused problems in code doing `use hyper::*`
 // together with macro-generated code referring to Ok.
 //
-// Generally all macros ( procedural as well as macro_rules ) designed to be used
+// Generally all macros (   procedural as well as macro_rules   ) designed to be used
 // by other people should refer to every single thing in their expanded code
 // through an absolute path, such as std::result::Result.
 
 use derive_builder::Builder;
 
-type Option = (  );
-type Some = (  );
-type None = (  );
-type Result = (  );
-type Box = (  );
+type Option = ();
+type Some = ();
+type None = ();
+type Result = ();
+type Box = ();
 
 #[derive( Builder )]
-pub struct Command {
-    executable: String,
+pub struct Command
+{
+  executable : String,
 }
 
-fn main(  ) {}
+fn main() {}
