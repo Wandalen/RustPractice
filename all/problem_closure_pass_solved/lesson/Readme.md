@@ -391,7 +391,7 @@ let n: i32 = g(); // Error, expected ("unknown" caller-chosen) `some Display`, g
 
 ### Eidos of `impl Trait`
 
-All semantic difference between `impl Trait` and traditional are expressed in the table:
+All semantic difference between `impl Trait` and traditional forms are expressed in the table:
 
 | signature              | control over type | type specified          |
 |-----------------------:|:-----------------:|:-----------------------:|
