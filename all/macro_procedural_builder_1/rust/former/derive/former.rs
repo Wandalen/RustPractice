@@ -9,10 +9,8 @@ unzip_n!( 3 );
 unzip_n!( 4 );
 unzip_n!( 5 );
 
-
 //
 
-#[allow( dead_code )]
 #[derive( Debug )]
 enum ContainerKind
 {

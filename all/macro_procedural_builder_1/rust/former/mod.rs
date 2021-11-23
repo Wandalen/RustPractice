@@ -1,18 +1,8 @@
-#![ feature( type_name_of_val ) ]
-#![ feature( trace_macros ) ]
+// #![ feature( type_name_of_val ) ]
+// #![ feature( trace_macros ) ]
 
-extern crate proc_macro;
-extern crate proc_macro_error;
+pub extern crate former_derive;
+pub extern crate former_runtime;
 
-#[macro_use]
-mod wt;
-#[macro_use]
-mod meta_tools;
-mod former;
-
-#[proc_macro_derive( Former )]
-#[proc_macro_error::proc_macro_error]
-pub fn former( input : proc_macro::TokenStream ) -> proc_macro::TokenStream
-{
-  former::former( input )
-}
+// #[macro_use]
+// pub extern crate maplit;
