@@ -3,47 +3,47 @@ use quote::quote;
 use syn::{ parse_macro_input, DeriveInput };
 use proc_macro_error::{ abort };
 
-// #[ macro_export ]
-macro_rules! inspect_type_of
-{
-  ( $src : expr ) =>
-  {{
-    let mut result = String::new();
-    let stringified = stringify!( $src );
+// // #[ macro_export ]
+// macro_rules! inspect_type_of
+// {
+//   ( $src : expr ) =>
+//   {{
+//     let mut result = String::new();
+//     let stringified = stringify!( $src );
 
-    result.push_str( &format!( "= {} at {}:{}", stringified, file!(), line!() ) );
+//     result.push_str( &format!( "= {} at {}:{}", stringified, file!(), line!() ) );
 
-    let size = &std::mem::size_of_val( &$src ).to_string()[ .. ];
-    let name = std::any::type_name_of_val( &$src );
-    result.push_str( &format!( "\n  sizeof( {} ) = {}",name, size )[ .. ] );
+//     let size = &std::mem::size_of_val( &$src ).to_string()[ .. ];
+//     let name = std::any::type_name_of_val( &$src );
+//     result.push_str( &format!( "\n  sizeof( {} ) = {}",name, size )[ .. ] );
 
-    let size = &std::mem::size_of_val( &&$src ).to_string()[ .. ];
-    let name = std::any::type_name_of_val( &&$src );
-    result.push_str( &format!( "\n  sizeof( {} ) = {}",name, size )[ .. ] );
+//     let size = &std::mem::size_of_val( &&$src ).to_string()[ .. ];
+//     let name = std::any::type_name_of_val( &&$src );
+//     result.push_str( &format!( "\n  sizeof( {} ) = {}",name, size )[ .. ] );
 
-    result
-  }};
-  ( $( $src : expr ),+ $(,)? ) =>
-  {
-    ( $( $crate::dbg!( $src ) ),+ )
-  };
-}
+//     result
+//   }};
+//   ( $( $src : expr ),+ $(,)? ) =>
+//   {
+//     ( $( $crate::dbg!( $src ) ),+ )
+//   };
+// }
+
+// //
+
+// // #[ macro_export ]
+// macro_rules! inspect_logging_type_of
+// {
+//   ( $src : expr ) =>
+//   {{
+//     let result = inspect_type_of!( $src );
+//     println!( "{}", result );
+//   }}
+// }
 
 //
 
-// #[ macro_export ]
-macro_rules! inspect_logging_type_of
-{
-  ( $src : expr ) =>
-  {{
-    let result = inspect_type_of!( $src );
-    println!( "{}", result );
-  }}
-}
-
-//
-
-pub fn builder( input : proc_macro::TokenStream ) -> proc_macro::TokenStream
+pub fn former( input : proc_macro::TokenStream ) -> proc_macro::TokenStream
 {
   let ast = parse_macro_input!( input as DeriveInput );
   let name = &ast.ident;
@@ -53,7 +53,7 @@ pub fn builder( input : proc_macro::TokenStream ) -> proc_macro::TokenStream
   let fields = if let syn::Data::Struct( syn::DataStruct { fields : syn::Fields::Named( syn::FieldsNamed { ref named, .. } ), .. } ) = ast.data
   {
     // dbg!( &named );
-    inspect_logging_type_of!( named );
+    // inspect_logging_type_of!( named );
     named
   }
   else

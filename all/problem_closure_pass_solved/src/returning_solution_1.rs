@@ -16,7 +16,7 @@ fn main()
 
 pub fn solution1< T >() -> T
 where
-  T: Default,
+  T : Default,
 {
   T::default()
 }

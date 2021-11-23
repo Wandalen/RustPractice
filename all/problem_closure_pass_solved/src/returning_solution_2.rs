@@ -1,6 +1,6 @@
 use core::fmt::Display;
 
-fn main ()
+fn main()
 {
   let x = problem::< i32 >();
   println!( "{}", x );
