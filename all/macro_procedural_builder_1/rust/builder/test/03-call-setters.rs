@@ -1,3 +1,4 @@
+
 // Generate methods on the builder for setting a value of each of the struct
 // fields.
 //
@@ -10,7 +11,9 @@
 //         ...
 //     }
 
-use derive_builder::Builder;
+#![allow(dead_code)]
+
+use builder_derive::Builder;
 
 //
 

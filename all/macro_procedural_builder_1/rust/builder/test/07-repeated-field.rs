@@ -29,7 +29,9 @@
 //     https://docs.rs/syn/1.0/syn/struct.Attribute.html
 //     https://docs.rs/syn/1.0/syn/enum.Meta.html
 
-use derive_builder::Builder;
+// #![allow(dead_code)]
+
+use builder_derive::Builder;
 
 #[derive( Builder )]
 pub struct Command
@@ -45,11 +47,11 @@ pub struct Command
 fn main()
 {
   let command = Command::builder()
-    .executable( "cargo".to_owned() )
-    .arg( "build".to_owned() )
-    .arg( "--release".to_owned() )
-    .build()
-    .unwrap();
+  .executable( "cargo".to_owned() )
+  .arg( "build".to_owned() )
+  .arg( "--release".to_owned() )
+  .build()
+  .unwrap();
 
   assert_eq!( command.executable, "cargo" );
   assert_eq!( command.args, vec!["build", "--release"] );

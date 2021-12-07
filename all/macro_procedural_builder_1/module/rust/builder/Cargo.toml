@@ -1,0 +1,25 @@
+[package]
+name = "builder"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "builder"
+path = "../../../rust/builder/lib.rs"
+
+# [[example]]
+# name = "current"
+# path = "../../../rust/builder/test/full.rs"
+
+# [[test]]
+# name = "builder_test"
+# path = "../../../rust/builder/test/builder.rs"
+
+[dev-dependencies]
+trybuild = { version = "1.0.52", features = ["diff"] }
+
+[dependencies]
+anyhow = "1.0.47"
+maplit = "1.0.2"
+# builder_derive = { path = "../builder_derive", version = "0.1.0" }
+# builder_runtime = { path = "../builder_runtime", version = "0.1.0" }

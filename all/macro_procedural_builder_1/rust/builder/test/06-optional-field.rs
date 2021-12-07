@@ -52,7 +52,8 @@
 //         },
 //        )
 
-use derive_builder::Builder;
+#![allow(dead_code)]
+use builder_derive::Builder;
 
 #[derive( Builder )]
 pub struct Command

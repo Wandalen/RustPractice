@@ -1,15 +1,15 @@
 [package]
-name = "former_runtime"
+name = "builder_runtime"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "former_runtime"
-path = "../../../rust/former/runtime/mod.rs"
+name = "builder_runtime"
+path = "../../../rust/builder/runtime/mod.rs"
 
 [[test]]
 name = "derive_runtime_test"
-path = "../../../rust/former/test/runtime.rs"
+path = "../../../rust/builder/test/runtime.rs"
 
 [dev-dependencies]
 trybuild = { version = "1.0.52", features = ["diff"] }

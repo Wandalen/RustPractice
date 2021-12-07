@@ -1,5 +1,5 @@
-error: expected `builder(   each = "..."   )`
-  --> tests/08-unrecognized-attribute.rs:22:7
+error: expected `builder( each = "..." )`
+  --> ../../../rust/builder/test/08-unrecognized-attribute.rs:24:3
    |
-22 |     #[builder(   eac = "arg"   )]
-   |       ^^^^^^^^^^^^^^^^^^^^
+24 |   #[builder( eac = "arg" )]
+   |   ^^^^^^^^^^^^^^^^^^^^^^^^^
