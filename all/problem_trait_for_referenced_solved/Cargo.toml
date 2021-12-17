@@ -1,0 +1,12 @@
+[package]
+name = "problem_trait_for_referenced"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "problem"
+path = "src/problem.rs"
+
+[[bin]]
+name = "solution"
+path = "src/solution.rs"
