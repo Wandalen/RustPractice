@@ -2,6 +2,10 @@
 // #![ cfg_attr( feature = "nightly", feature( type_name_of_val ) ) ]
 #![ cfg_attr( nightly, feature( type_name_of_val ) ) ]
 
+///
+/// Run it with : `RUSTFLAGS="--cfg nightly" cargo run`
+///
+
 // #[ cfg( feature = "nightly" ) ]
 #[ cfg( nightly ) ]
 use module1::name_of;
