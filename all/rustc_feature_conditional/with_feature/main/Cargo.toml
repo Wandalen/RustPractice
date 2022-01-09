@@ -1,0 +1,11 @@
+[package]
+name = "rustc_feature_conditional"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+nightly = [ "module1/nightly" ]
+default = []
+
+[dependencies]
+module1 = { path = "../module1" }

@@ -304,28 +304,66 @@ fn field_setter_map( field : &FormerField ) -> syn::Stmt
 
 //
 
-struct AttrEach
-{
-  // bracket_token : syn::token::Bracket,
-  bracket_token : syn::token::Paren,
-  each_ident : syn::Ident,
-  assign_token : syn::Token![ = ],
-  name : syn::LitStr,
-}
+// struct AttrEach
+// {
+//   // bracket_token : syn::token::Bracket,
+//   bracket_token : syn::token::Paren,
+//   each_ident : syn::Ident,
+//   assign_token : syn::Token![ = ],
+//   name : syn::LitStr,
+// }
+//
+// impl syn::parse::Parse for AttrEach
+// {
+//   fn parse( input : syn::parse::ParseStream ) -> Result< Self, syn::Error >
+//   {
+//     let content;
+//     Ok( AttrEach
+//     {
+//       bracket_token : syn::parenthesized!( content in input ),
+//       each_ident : content.parse()?,
+//       assign_token : content.parse()?,
+//       name : content.parse()?,
+//     })
+//   }
+// }
 
-impl syn::parse::Parse for AttrEach
+//
+
+fn attr_pair_single( attr : &syn::Attribute ) -> Result< ( String, syn::Lit, syn::Meta ), syn::Error >
 {
-  fn parse( input : syn::parse::ParseStream ) -> Result< Self, syn::Error >
+
+  let meta = attr.parse_meta()?;
+
+  let ( key, val );
+  match meta
   {
-    let content;
-    Ok( AttrEach
+    syn::Meta::List( ref meta_list ) =>
+    match meta_list.nested.first()
     {
-      bracket_token : syn::parenthesized!( content in input ),
-      each_ident : content.parse()?,
-      assign_token : content.parse()?,
-      name : content.parse()?,
-    })
-  }
+      Some( nested_meta ) => match nested_meta
+      {
+        syn::NestedMeta::Meta( meta2 ) => match meta2
+        {
+          syn::Meta::NameValue( name_value ) => // match &name_value.lit
+          {
+            if meta_list.nested.len() != 1
+            {
+              return Err( syn::Error::new( attr.span(), format!( "Expected single element of the list, but got {}", meta_list.nested.len() ) ) );
+            }
+            key = name_value.path.get_ident().unwrap().to_string();
+            val = name_value.lit.clone();
+          },
+          _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::Meta::NameValue( name_value )" ) ),
+        },
+        _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::NestedMeta::Meta( meta2 )" ) ),
+      },
+      _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected Some( nested_meta )" ) ),
+    },
+    _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::Meta::List( meta_list )" ) ),
+  };
+
+  Ok( ( key, val, meta ) )
 }
 
 //
@@ -337,46 +375,25 @@ fn field_setter_attr_map( field : &FormerField ) -> Result< Option< syn::Stmt >,
 
   for attr in field.attrs
   {
-    // println!( "{:?}", field );
-    // tree_print!( attr.tokens );
 
-    let meta = attr.parse_meta()?;
-    // tree_print!( meta );
+    let ( key, val, meta ) = attr_pair_single( &attr )?;
 
-    let ( lit_str, path );
-    match meta
+    let val = match &val
     {
-      syn::Meta::List( ref meta_list ) => match meta_list.nested.first()
+      syn::Lit::Str( lit_str ) =>
       {
-        Some( nested_meta ) => match nested_meta
-        {
-          syn::NestedMeta::Meta( meta2 ) => match meta2
-          {
-            syn::Meta::NameValue( name_value ) => match &name_value.lit
-            {
-              syn::Lit::Str( _lit_str ) =>
-              {
-                path = name_value.path.get_ident().unwrap().to_string();
-                lit_str = _lit_str.clone();
-              }
-              _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::Lit::Str( lit_str )" ) ),
-            },
-            _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::Meta::NameValue( name_value )" ) ),
-          },
-          _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::NestedMeta::Meta( meta2 )" ) ),
-        },
-        _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected Some( nested_meta )" ) ),
-      },
-      _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::Meta::List( meta_list )" ) ),
+        lit_str.clone()
+      }
+      _ => return Err( syn::Error::new( attr.span(), "Unknown format of attribute, expected syn::Lit::Str( lit_str )" ) ),
     };
 
-    if path != "each"
+    if key != "each"
     {
       let error = syn::Error::new( attr.span(), "expected `builder( each = \"...\" )`" );
       return Err( error );
     }
 
-    let name2_ident = syn::Ident::new( lit_str.value().as_ref(), meta.span() );
+    let name2_ident = syn::Ident::new( val.value().as_ref(), meta.span() );
 
     if name2_ident.to_string() == name_ident.to_string()
     {
@@ -406,57 +423,6 @@ fn field_setter_attr_map( field : &FormerField ) -> Result< Option< syn::Stmt >,
 
     let stmt : syn::Stmt = syn::parse2( tokens ).unwrap();
     return Ok( Some( stmt ) );
-
-//     let attr_each : AttrEach = syn::parse2( attr.tokens.clone() ).expect( "Could not parse attr" );
-//
-//     if attr_each.each_ident.to_string() != "each"
-//     {
-//       let error = syn::Error::new( attr.span(), "expected `builder( each = \"...\" )`" );
-//       return Err( error );
-//     }
-//
-//     // if let proc_macro2::TokenTree::Group( group ) = attr.tokens.clone().into_iter().next().unwrap()
-//     {
-//       // tree_print!( group );
-//       // let attr_each : AttrEach = syn::parse2( group.stream() ).expect( "Could not parse attr" );
-//
-//       // println!( "each_ident : {}", attr_each.each_ident.to_string() );
-//       // println!( "name : {}", attr_each.name.value() );
-//
-//       let name2_ident = syn::Ident::new( attr_each.name.value().as_ref(), attr_each.name.span() );
-//
-//       if name2_ident.to_string() == name_ident.to_string()
-//       {
-//         return Ok( None );
-//       }
-//
-//       let tokens =
-//       {
-//         // let ty = &field.ty;
-//         let internal_ty = parameter_internal_first( field.ty );
-//         // let non_optional_ty = &field.non_optional_ty;
-//         quote!
-//         {
-//           pub fn #name2_ident< Src >( &mut self, src : Src ) -> &mut Self
-//           where Src : core::convert::Into< #internal_ty >,
-//           {
-//             if self.#name_ident.is_none()
-//             {
-//               self.#name_ident = core::option::Option::Some( Default::default() );
-//             }
-//             if let core::option::Option::Some( some ) = &mut self.#name_ident
-//             {
-//               some.push( src.into() );
-//             }
-//             self
-//           }
-//         }
-//       };
-//
-//       let stmt : syn::Stmt = syn::parse2( tokens ).unwrap();
-//       return Ok( Some( stmt ) );
-//     }
-
   }
 
   return Ok( None );
@@ -477,13 +443,26 @@ pub fn builder( input : proc_macro::TokenStream ) -> Result< proc_macro2::TokenS
 
   let builder_name = format!( "{}Former", name );
   let builder_ident = syn::Ident::new( &builder_name, name.span() );
-  let fields = if let syn::Data::Struct( syn::DataStruct { fields : syn::Fields::Named( syn::FieldsNamed { ref named, .. } ), .. } ) = ast.data
+  // let fields = if let syn::Data::Struct( syn::DataStruct { fields : syn::Fields::Named( syn::FieldsNamed { ref named, .. } ), .. } ) = ast.data
+  // {
+  //   named
+  // }
+  // else
+  // {
+  //   abort!( ast.ident.span(), "Expects struct" );
+  // };
+
+  let fields = match ast.data
   {
-    named
-  }
-  else
-  {
-    abort!( ast.ident.span(), "Expects struct" );
+    syn::Data::Struct( ref data_struct ) => match data_struct.fields
+    {
+      syn::Fields::Named( ref fields_named ) =>
+      {
+        &fields_named.named
+      },
+      _ => return Err( syn::Error::new( ast.span(), "Unknown format of data, expected syn::Fields::Named( ref fields_named )" ) ),
+    },
+    _ => return Err( syn::Error::new( ast.span(), "Unknown format of data, expected syn::Data::Struct( ref data_struct )" ) ),
   };
 
   let ( fields_none, fields_optional, fields_build, fields_names, fields_setter, fields_setter2 ) = fields.iter().map( | field |
