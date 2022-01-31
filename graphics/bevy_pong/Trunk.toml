@@ -1,0 +1,8 @@
+[serve]
+addr = "127.0.0.1"
+port = 9999
+open = true
+
+[tools]
+wasm_bindgen = "0.2.79"
+wasm_opt = "version_103"

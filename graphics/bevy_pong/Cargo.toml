@@ -3,10 +3,59 @@ name = "bevy_pong"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+opt-level = "z" # optimize for small code size aggressively.
+lto = true # link-time optimization
+panic = "abort" # abort immediately rather than unwind
+codegen-units = 1 # improves optimization, but decrease compile time
+# strip = "symbols" # strip symbols
+
+[profile.release.package."*"]
+opt-level = "z"
+
+# Enable only a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+
+[features]
+
+fast_build = [ "bevy/dynamic" ]
+
+default = [
+]
+
+## depedendencies
 
 [dependencies]
+bevy = { version = "0.6", default-features = false, features = [
 
-bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false, features = [
-  "render",
+  # "default",
+  # "render",
+  "bevy_core_pipeline",
+  # "bevy_pbr",
+  "bevy_render",
+  "bevy_sprite",
+  "bevy_winit",
+  # "x11",
+
+  # "bevy_app",
+  # "bevy_ecs",
+  # "bevy_input",
+  # "bevy_math",
+  # "bevy_window",
+  # "bevy_utils",
+
 ]}
+# bevy-inspector-egui = "0.7.6"
+# bevy_mod_debugdump = "0.3.0"
+
+[patch.crates-io]
+bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
+# naga = { version = "0.8.0", features = ["glsl-in", "spv-in", "glsl-out"] }
+
+# [patch."https://github.com/bevyengine/bevy"]
+# bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
