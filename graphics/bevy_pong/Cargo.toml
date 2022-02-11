@@ -40,7 +40,7 @@ bevy = { version = "0.6", default-features = false, features = [
   "bevy_render",
   "bevy_sprite",
   "bevy_winit",
-  # "x11",
+  "x11",
 
   # "bevy_app",
   # "bevy_ecs",
