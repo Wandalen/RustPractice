@@ -190,7 +190,7 @@ Result< (), wgpu::SurfaceError >
   // println!( "{:?}", color_attachments );
 
   drop( surface_texture );
-  drop( command_encoder );
+  // drop( command_encoder );
 
 // thread 'main' panicked at 'Texture[0] does not exist', /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:116:32
 // stack backtrace:
@@ -220,7 +220,6 @@ Result< (), wgpu::SurfaceError >
 //              at ./src/main.rs:7:3
 //   12: core::ops::function::FnOnce::call_once
 //              at /rustc/efec545293b9263be9edfb283a7aa66350b3acbf/library/core/src/ops/function.rs:227:5
-
 
   // _queue.submit( std::iter::once( command_encoder.finish() ) );
   // surface_texture.present();
