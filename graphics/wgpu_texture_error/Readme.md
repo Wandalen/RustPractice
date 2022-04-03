@@ -14,17 +14,9 @@ Regular function `render` ends with
 ```
 But if instead of that you will deconstruct ( drop ) `surface_texture` then deconstructing of `command_encoder` will throw an exception `Texture[0] does not exist`
 
-Creating command encoder:
 ```
-  let mut command_encoder = device.create_command_encoder( &wgpu::CommandEncoderDescriptor
-  {
-    label : Some( "Render Encoder" ),
-  });
-```
-
-Getting surface texture:
-```
-let surface_texture = surface.get_current_texture()?;
+  drop( surface_texture );
+  // drop( command_encoder );
 ```
 
 That might be bug, might be expected behavior. Anyway such behavior is very counter-intuitive for me because I don't understand relations and logic behind that. Please explain if you do.
