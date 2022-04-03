@@ -1,0 +1,10 @@
+[package]
+name = "wgpu_texture_error"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+winit = "~0.26"
+wgpu = "~0.12"
+pollster = "~0.2"
+bytemuck = { version = "~1.5", features = [ "derive" ] }
