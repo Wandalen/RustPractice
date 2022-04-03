@@ -1,6 +1,6 @@
 **Description**
 
-Unexpected exception on dropping of CommandEncoder.
+Unexpected exception on dropping of CommandEncoder if SurfaceTexture is dropped first.
 
 **Repro steps**
 
