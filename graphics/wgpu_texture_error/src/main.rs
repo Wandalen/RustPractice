@@ -192,24 +192,24 @@ Result< (), wgpu::SurfaceError >
   drop( surface_texture );
   drop( command_encoder );
 
-// thread 'main' panicked at 'Texture[0] does not exist', /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:116:32
+// thread 'main' panicked at 'Texture[0] does not exist', /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:116:32
 // stack backtrace:
 //    0: rust_begin_unwind
 //              at /rustc/efec545293b9263be9edfb283a7aa66350b3acbf/library/std/src/panicking.rs:498:5
 //    1: core::panicking::panic_fmt
 //              at /rustc/efec545293b9263be9edfb283a7aa66350b3acbf/library/core/src/panicking.rs:107:14
 //    2: wgpu_core::hub::Storage<T,I>::get
-//              at /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:116:32
+//              at /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:116:32
 //    3: <wgpu_core::hub::Storage<T,I> as core::ops::index::Index<wgpu_core::id::Valid<I>>>::index
-//              at /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:89:9
+//              at /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/hub.rs:89:9
 //    4: wgpu_core::device::Device<A>::untrack
-//              at /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/device/mod.rs:486:20
+//              at /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/device/mod.rs:486:20
 //    5: wgpu_core::device::<impl wgpu_core::hub::Global<G>>::command_encoder_drop
-//              at /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/device/mod.rs:4192:13
+//              at /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-core-0.12.2/src/device/mod.rs:4192:13
 //    6: <wgpu::backend::direct::Context as wgpu::Context>::command_encoder_drop
-//              at /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-0.12.0/src/backend/direct.rs:1751:13
+//              at /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-0.12.0/src/backend/direct.rs:1751:13
 //    7: <wgpu::CommandEncoder as core::ops::drop::Drop>::drop
-//              at /home/kos/.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-0.12.0/src/lib.rs:920:17
+//              at /.cargo/registry/src/github.com-1ecc6299db9ec823/wgpu-0.12.0/src/lib.rs:920:17
 //    8: core::ptr::drop_in_place<wgpu::CommandEncoder>
 //              at /rustc/efec545293b9263be9edfb283a7aa66350b3acbf/library/core/src/ptr/mod.rs:188:1
 //    9: core::mem::drop
