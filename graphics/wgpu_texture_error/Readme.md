@@ -19,7 +19,7 @@ But if instead of that you will deconstruct ( drop ) `surface_texture` then deco
   // drop( command_encoder );
 ```
 
-That might be bug, might be expected behavior. Anyway such behavior is very counter-intuitive for me because I don't understand relations and logic behind that. Please explain if you do.
+That might be bug, might be expected behavior. Anyway such behavior is very counter-intuitive for me because I don't understand **relations and logic** behind that. Please explain if you do.
 
 **Expected vs observed behavior**
 
