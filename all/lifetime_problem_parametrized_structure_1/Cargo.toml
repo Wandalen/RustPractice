@@ -1,0 +1,6 @@
+[package]
+name = "lifetime_problem_parametrized_structure_1"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
