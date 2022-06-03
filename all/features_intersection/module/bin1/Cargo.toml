@@ -1,0 +1,13 @@
+[package]
+name = "features_intersection"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+has_f1 = [ "lib1/has_f1", "lib2/has_f1" ]
+default = []
+all = [ "has_f1" ]
+
+[dependencies]
+lib1 = { path = "../lib1", optional = true }
+lib2 = { path = "../lib2", optional = true }

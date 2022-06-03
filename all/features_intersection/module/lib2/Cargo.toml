@@ -1,0 +1,11 @@
+[package]
+name = "lib2"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+has_f1 = []
+default = []
+all = [ "has_f1" ]
+
+[dependencies]

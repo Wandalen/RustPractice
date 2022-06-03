@@ -14,7 +14,7 @@ fn main()
   cfg_aliases!
   {
     // etc
-    nalgebra_ops_x : { feature = "nalgebra_ops" }
+    nalgebra_ops_x : { feature = "nalgebra_ops" },
     cgmath_ops :
     {
       not( nalgebra_ops_x )
